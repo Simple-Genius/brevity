@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,7 +8,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [],
+        children: [
+          Image.asset('images/Rectangle 1.png'),
+          Text(
+            'Welcome',
+            style: GoogleFonts.philosopher(fontSize: 21),
+          )
+        ],
       ),
     );
   }
