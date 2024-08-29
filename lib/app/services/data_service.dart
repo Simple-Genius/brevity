@@ -1,9 +1,14 @@
 import 'package:brevity/app/data/constants.dart';
 import 'package:brevity/app/data/model.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DataService extends GetxService {
-  final uid = '6f609bd7-b254-4579-99bc-c003a729188e';
+  @override
+  onInit() {
+    super.onInit();
+    retrieveData();
+  }
 
   Future<void> saveData(Task task) async {
     await supabase.from('tasks').insert({
@@ -16,7 +21,13 @@ class DataService extends GetxService {
     });
   }
 
-  Future<List<Map<String, dynamic>>> retrieveData() async {
-    return await supabase.from('tasks').select();
+  SupabaseStreamBuilder retrieveData() {
+    return supabase
+        .from('tasks')
+        .stream(primaryKey: ['id']).order('id', ascending: false);
+  }
+
+  Future<void> deleteTask(String id) async {
+    await supabase.from('tasks').delete().eq('uid', id);
   }
 }
