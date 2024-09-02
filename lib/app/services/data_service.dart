@@ -21,6 +21,10 @@ class DataService extends GetxService {
     });
   }
 
+  Future<void> updateData(String taskId, String field, String value) async {
+    await supabase.from('tasks').update({field: value});
+  }
+
   SupabaseStreamBuilder retrieveData() {
     return supabase
         .from('tasks')
